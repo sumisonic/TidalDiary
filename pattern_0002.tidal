@@ -1,0 +1,12 @@
+cps (130/120)
+
+d1 $ stack[
+smash 2 [2,4,6] $ sound (every 2 (0.5 <~) $ samples "tabla*8" (every 5 (0.5 <~) $ every 3 (0.25 <~) $ density 1.25 $ run 26)) # speed "0.8 1.0 0.5 -0.8 1.0 0.75" # gain "0.9",
+every 2 (0.5 <~) $ spread slow [4,6] $ sound "909(6,8)" # speed "0.8" # shape "0.1" # gain "[1.1 0.9]*2",
+spread slow [3,8] $ every 2 (0.25 <~) $sound "808mt(3,12,2)" # speed "0.8 -0.8",
+smash 4 [2,3,4] $ slow 3 $ striate 12 $ sound "noise2:3" # speed "1.5" # gain "1.5",
+slow 4 $ sound "wobble(3,12)" # speed "1 1 1.2" # shape "0.2",
+striate 16 $ sound "~ 808mc:2/4 ~ ~" # speed "2"
+]
+
+hush
