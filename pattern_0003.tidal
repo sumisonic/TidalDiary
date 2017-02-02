@@ -1,0 +1,13 @@
+cps (90/120)
+
+d1
+$ slowspread density [0.5, 0.75 .. 3]
+$ degradeBy 0.4
+$ stack[
+  every 3 (stut 4 0.5 (0.5)) $ sound "amencutup*12" # cut "2" # pan rand # n (choose[0, 1 .. 31]) # gain (choose[1,1.15,1.2]) # up (choose[-5,-1,0,-2,-3,-4]),
+  stut 4 0.5 (0.5) $ sound "pad:2(3,8)" # up "-16 -15 -16" # begin (choose[0, 0.1 .. 0.5]) # cut "4" # gain "1" # shape "0.3" # pan rand,
+  sound "909*4" # speed "0.8" # gain "1.2" # shape "0.5",
+  sound "[~ 808:1*2]*4" # speed "0.75" # gain "1.1" # pan "0 1 0 1"
+  ]
+
+hush
