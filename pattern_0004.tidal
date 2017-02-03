@@ -1,0 +1,14 @@
+cps (120/120)
+
+d1
+$ slowspread degradeBy [0.7, 0.6 .. 0.0]
+$ stack[
+slow 4 $ every 3 (0.5 <~) $ every 2 (slow 2) $ n (run 32) # sound "amencutup" # pan rand # speed (scale (-1.0) 1.0 $ rand),
+spread (slow) [2,4] $ sound "[glitch:2](1,8,3)",
+stut 4 0.1 (0.5) $ every 2 (0.5 <~) $ every 3 (0.5 <~) $ sound "[voodoo, 909](3,8)" # speed "0.8" # gain "1.1",
+stut 4 0.5 (0.5) $ slow 4 $ sound "bass0*2" # speed "0.25" # cutoff "1200" # orbit "0.1" # room "0.25",
+stut 4 0.3 (0.5) $ slow 4 $ sound "808 cp" # speed "0.75 1.0",
+sound "wobble*4" # slow 4 (gain "1.3 0") # cut "1"
+]
+
+hush
