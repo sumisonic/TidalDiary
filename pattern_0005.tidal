@@ -1,0 +1,15 @@
+cps (130/120)
+
+d1
+$ every 2 (slowspread density [0.25, 0.5 .. 2])
+$ stack [
+spin 2 $ sound "tink:2(5,8)" # cut "1" # slow 8 (up "-32 -24") # gain "1.0",
+spin 4 $ every 2 (striate 4) $ every 3 (striate 8) $ degradeBy 0.2 $ every 2 (slow 2) $ sound "breaks157(2,8,4)" # begin (choose[0, 1/32 .. (1-(1/32))]) # speed (scale (0.25) 0.7 $ rand) |*| speed (choose[(-1), 1, 1, 1, 1, 1, 1]) # pan rand # shape "0.95" # gain "0.5" # cut "4",
+every 2 (0.25 <~) $ every 4 (slow 2) $ sound "[odx, 909](3,8)" # shape "0.5" # gain "0.75" # speed "0.75",
+jux (rev) $ stut 2 0.5 (0.25) $ sound "[~ bend]*2",
+stut 4 0.5 (0.5) $ sound "drum/2" # speed "0.7" # gain "1.2",
+slow 2 $ every 2 (0.175 ~>) $ sound "feel:4(1,8,4)" # speed "0.8",
+sound "bass1/4" # gain "1.2"
+]
+
+hush
