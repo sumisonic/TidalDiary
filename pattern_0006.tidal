@@ -1,0 +1,13 @@
+cps(110/120)
+
+d1
+$ iter 4
+$ stack[
+every 3 (0.25 <~) $ sound "[909(3,8),amencutup(1,8,4)]" # speed "0.75" # shape "0.9" # gain "0.9",
+jux rev $ slowspread ($) [stut 8 0.5 0.5, stut 4 0.5 0.5] $ sound "feel:3(1,8,4)" # speed (choose[0.5,0.75]) # gain "0.85",
+sound "haw*8" # nudge "[0 0.04]*4" # speed "1.1",
+sound "ulgab/2" # gain "1.1" # speed "0.75",
+jux rev $ slow 2 $ sound "odx:1(1,8,4)" # shape "0.9" # gain "0.7" # speed "-0.3" # cut "1"
+]
+
+hush
