@@ -1,0 +1,17 @@
+cps (130/120)
+
+d1
+$ every 2 (0.5 <~)
+$ every 3 (0.25 <~)
+$ every 4 (rev)
+$ every 5 (0.75 ~>)
+$ stack [
+  every 6 (stut 4 0.5 0.5) $ every 7 (stut 8 0.5 0.5) $ every 31 (stut 16 0.1 0.25) $ every 2 (jux (rev)) $ slow 2 $ n (run 32) # sound "amencutup" # speed (choose[0.5, 0.6, 0.6, 0.6, 0.7, 1.0, -0.6]) # gain "0.6" # shape "0.7" # hcutoff "100",
+  every 3 (0.25 ~>) $ every 5 (rev) $ sound "909(3,8)" # speed "1.2",
+  slow 2 $ sound "voodoo*2" # gain "1.0" # shape "0.5" # speed "0.8",
+  sound "jungbass:2/2" # cutoff "200" # cut "1",
+  sound "808:1*8" # speed "1.1" # slow 16 (gain "0 1 1 1"),
+  every 4 (stut 8 0.5 0.25) $ sound "ul:6(1,8,4)/2" # speed "0.7" # gain "0.9"
+]
+
+hush
