@@ -1,0 +1,13 @@
+cps (45/120)
+
+d1
+$ slowspread density [0.25, 0.5 .. 5]
+$ degradeBy 0.5
+$ stack[
+  sound "909(4,4)" # shape "0.5" # gain "1.0" # speed "0.85",
+  sound "hh(8,4)*2" # n (choose[0,0,0,0,1,7,8,8,8,8]) # gain "[0.75 1.0]*4" # pan rand,
+  jux (rev) $ sound "pluck(2,16,1)" # n "3 5",
+  slow 2 $ stut 8 0.5 1.2 $ sound "pluck*3" # n (irand 17) # cut "2" # up "-5"
+  ]
+
+hush
