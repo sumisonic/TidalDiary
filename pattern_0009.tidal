@@ -1,0 +1,11 @@
+cps (90/120)
+
+d1
+$ stack [
+  smash 2 [1,4] $ jux ( (# up (slow 4 "5 2 3")) . rev . (0.5 <~)) $ n (iter 7 "0 3 5 7") # up (slow 8 "0") # sound "pluck",
+  iter 4 $ stut 4 0.3 1.33 $ jux (rev) $ sound (slow 2 "hh27(3,4)") # n (choose[0,0,0,4,4,8,10]),
+  stut 3 0.3 0.5 $ slow 2.75 $ degradeBy 0.4 $ sound "~ drumtraks:9" # speed "0.7" # gain "0.8",
+  slow 2 $ every 4 (0.25 <~) $ sound "feel:6"
+  ]
+
+hush
