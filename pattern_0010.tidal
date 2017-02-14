@@ -1,0 +1,12 @@
+cps (65/120)
+
+d1
+$ stack [
+every 6 (smash 2 [1,2]) $ jux ( (# up (density 4 "12 7 17")) . rev) $ slowspread spin [3,2,3,1] $ sound "[909(3,4), 808:1(2,16)]" # speed "0.8" # shape "0.5" # gain "0.9",
+slow 2 $ sound "feel:6",
+whenmod 6 4 (density (3%2)) $ sound "[[~ future]*2, feel:4]",
+sound "feel:1*12" # pan rand # speed "1.5 2 1.0 2" # gain "1.2",
+sound "odx*3" # speed "0.9"
+]
+
+hush
