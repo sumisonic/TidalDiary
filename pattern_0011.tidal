@@ -1,0 +1,12 @@
+cps (65/120)
+
+d1
+$ stack [
+sound "909(3,8)" # shape "0.3" # speed "0.9",
+sound "808:1*8",
+sound "feel:6 ~ sn:7/2",
+sound "chin*12" # n (irand 4) # pan rand,
+jux ((# up "0 -2") . (0.5 ~>)) $ iter 4 $ sound "perc:4(3,8,2)" # up (slow 2 "0 3") # gain "1.2"
+] # nudge (slow 8 (slowspread (slow) [1,2,3,2] sine1))
+
+hush
