@@ -1,0 +1,12 @@
+cps (45/120)
+
+d1
+$ stack [
+jux ( (every 4 (density 1.5)) . rev) $ slowspread spin [3,2] $ sound "[odx(3,8), 909*4]" # nudge "0 0.45" # shape "0.5" # gain "0.9" # up "-2 0",
+sound "808:1(16,16)" # gain "[0.6 1.1]*8" # nudge "[0 0.2]*2",
+slow 2 $ every 4 (0.25 <~) $ slowspread striate [32,256,64,128] $ sound "bend:3(9,12)" # up "0 -2 2 4" # pan rand,
+slow 2 $ every 2 (0.25 ~>) $ slowspread ($) [stut 4 0.2 0.5, stut 3 0.2 0.5] $ sound "[~ odx]*3" # n "13 10 1 6" # density 4 (up "-16 -12"),
+sound "feel:6"
+]
+
+hush
