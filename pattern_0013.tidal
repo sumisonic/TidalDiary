@@ -1,0 +1,11 @@
+cps (130/120)
+
+d1 
+$ stack [
+palindrome $ brak $ iter 4 $ sound "[odx, 909] [hh hh?, odx:3] 909 odx:1" # speed (every 2 (density 4) (iter 8 "0.8 1.0 0.7 0.9")),
+stut 4 0.5 0.75 $ slow 8 $ sound "~ ul:5",
+slow 2 $ sound "wobble ~ wobble",
+whenmod 32 16 (# gain "0") $ sound "hh:8*8"
+]
+
+hush
