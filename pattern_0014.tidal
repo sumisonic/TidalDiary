@@ -1,0 +1,12 @@
+cps (130/120)
+
+d1
+$ stack [
+every 16 (stut 4 0.5 0.25) $ iter 4 $ every 4 (palindrome) $ whenmod 16 12 (slow 2) $ brak $ sound "[odx cp/2, 909*4, [odx:3(3,8)]/4, hh:5*8/3]" # speed "0.9",
+spin 4 $ sound "hh(3,8,5)" # gain "0.9" # slow 32 (gain "0 1"),
+slow 1.5 $ sound "wobble" # gain "1.2",
+sound "tabla*4" # n (irand 26) # cut "1" # gain "0.8" # speed "0.9",
+slow 4 $ stut 8 0.5 0.25 $ sound "bleep/2" # speed "0.25"
+]
+
+hush
