@@ -1,0 +1,19 @@
+cps (65/120)
+
+d1
+$ stack [
+  iter 4
+  $ brak
+  $ every 2 (stut 4 0.5 1.25)
+  $ stack[
+  every 2 (density 2) $ sound "[[odx, auto:4](3,8), [auto:9, auto:8](2,8,2), [auto:10*8]]" # speed (density 4 (iter 4 "0.75 -0.5 0.5 0.25")) # shape "0.5 0.7" # gain "0.8 0.7",
+  sound "[~ [auto:6/2]]",
+  degradeBy 0.2 $ every 3 (density 1.5) $ sound "ifdrums*8" # n (choose [0, 2]) # gain "0.7" # speed (choose [0.5, 0.25, 0.5]) # pan rand,
+  sound "ifdrums:1*8" # speed "2"
+  ] |*| gain "0.8 1 1 0.8 1 1 0.8 1",
+  every 2 (0.25 ~>) $ every 4 (brak) $ sound "[909, auto:5](3,8)" # speed "0.8" # shape "0.5" # gain "0.9",
+  sound "bass3*3 ~ ~ ~ ~ ~" # speed "0.5" # hcutoff "100" # gain "0.9",
+  spin 8 $ striate 16 $ slow 6 $ sound "rave:2" # gain "0.6" # up "-3"
+]
+
+hush
