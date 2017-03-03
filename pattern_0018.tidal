@@ -1,0 +1,27 @@
+cps (45/120)
+
+d1
+$ stack [
+  brak
+  $ iter 4
+  $ superimpose ((density 1.5))
+  $ every 4 (stut 4 0.5 1.25)
+  $ every 3 (density 1.5)
+  $ stack [
+    degradeBy 0.2 $ sound "[[auto:5, auto:4](3,8), auto:6(1,8), auto:8*8]" # speed "0.75 0.5 0.25" # shape "0.5" # gain "0.8",
+    every 3 (density 4) $ sound "808:1*4"
+  ] |*| gain "0.8 1 1 1 0.8 1 1 1" # coarse (choose [8, 4, 6, 2, 1]),
+  superimpose ((density 0.5).(0.75 ~>).(iter 4).(# coarse "8").(|*| gain "0.9 1 0.9 1"))
+  $ every 3 (stut 3 0.75 1.25)
+  $ every 4 brak
+  $ every 8 (density 1.5)
+  $ stack [
+    superimpose ((every 2 (0.33 ~>)).(0.5 ~>).(|*| speed "1.5").(|*| gain "0.8").(# coarse "8")) $ sound "[auto:5, 909]*2" # shape "0.6" # speed "0.8",
+    stut 3 0.5 0.66 $ sound "[~ ~ auto:7 ~ ~ ~ ~ ~]" # speed "0.8",
+    every 2 (slow 1.5) $ sound "[auto:10 auto:8]*12" # gain "1.2",
+    sound "arp/2" # shape "0.5"
+  ],
+  superimpose ((|*| speed "0.5").jux(0.5 ~>)) $ spin 4 $ striate 16 $ slow 4 $ sound "pad" # gain "0.7" # speed "0.7"
+]
+
+hush
