@@ -1,0 +1,20 @@
+cps (55/120)
+
+d1
+$ stut 2 0.5 3.25
+$ stack [
+  brak
+  $ iter 4
+  $ superimpose ((palindrome).(density 0.5).(|*| gain "0.8").(# coarse (choose[2, 6, 12, 3, 8, 4])).(0.75 ~>).(|*| speed (choose[0.5,1.5,0.75,0.25,-1])))
+  $ stack [
+    every 4 ((density 0.5).(|*| speed "-1")) $ sound "[[jungle:6, stomp:3, odx, 909](3,8), [industrial:5, cp](1,8,3), hh*4]" # shape "0.5" # speed "0.8" # gain "0.85",
+    degradeBy 0.3 $ jux((rev).(|*| gain (density 0.25 sine1))) $ sound "sn(8,12)" # n (iter 5 (density 4 (run 52))) # gain "0.65" # shape "0.7" # speed (iter 4 "-0.5 0.5 0.75 0.25 2")
+  ] |*| gain "0.8 1 1 1 0.8 1 1 1",
+  brak $ sound "[909, auto:5, ifdrums](5,8)" # shape "0.6" # speed (iter 3 "0.5 1 0.75") # coarse "3" # gain "0.9",
+  sound "[bass3*3 ~ ~ ~]/2" # shape "0.3" # gain "1" # up (slow 2 (iter 2 "-5 -8")),
+  sound "808:1*16" # gain (slow 8 "0 1.2"),
+  sound "stab/2" # gain "1.2" # speed "0.8",
+  superimpose ((|*| speed "0.75").jux(0.25 ~>)) $ spin 12 $ striate 2 $ slow 8 $ sound "rave:8" # gain "0.5" # speed "0.5"
+]
+
+hush
