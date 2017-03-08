@@ -1,0 +1,17 @@
+cps (65/120)
+
+d1 $ stack [
+  stut 2 0.6 1.25
+  $ superimpose ((slowspread (slow) [2, 3, 0.5]).(jux(palindrome)).(|*| gain "0.8").(|*| speed (density 8 "2 -1 1.5 0.5")))
+  $ stack[
+    brak $ every 8 (stut 4 0.5 0.25) $ every 3 (0.5 <~) $ iter 8 $ slow 2 (n (run 16)) # sound "ifdrums" # speed (iter 4 "0.5 0.75 0.4 -0.8 0.6") # coarse (density 10 "3 4 5 6 8 12") # gain "0.8" # shape "0.5",
+    sound "808:1*8" # gain (slow 8 "0 1.1"),
+    sound "odx:8(6,8,[0 3]/2)" # speed (iter 3 "0.5 0.75 -0.75") # coarse "8" # shape "0.5" # gain "0.8"
+  ] |*| gain "0.5 1 1 1 0.5 1 1 1" # hcutoff "120",
+  whenmod 4 2 brak $ superimpose ((0.25 ~>).(palindrome).(|*| gain "0.75").(|*| speed "-1 0.8 -1.25 1.25")) $ every 4 (within (0.5, 1.0) (stut 4 0.5 0.25)) $ sound "[909, auto:5, ifdrums]([3 5 6]/3,8,[0 2 0 5]/4)" # speed "0.7" # coarse (density 8 "4 6") # shape "0.6" # gain (slow 20 "1 1 1 1 1 1 1 1 0 0"),
+  sound "bass3(1,8,[0 6]/2)" # speed "0.7",
+  sound "[auto:4 ~ ~ auto:6/2]/2" # shape "0.5" # speed "0.95" # gain "1.1",
+  jux ((0.33 ~>).(|*| speed (choose [-0.75, 0.75, -1, 1])).(|*| gain "0.9")) $ stut 6 0.5 0.75 $ density 2 $ sound "808:0(3,8)" # up "-8 -7 -10" # coarse "12" # gain (slow 4 "0 0 0 1") |*| speed (choose [1, 1, -1]) # cutoff (slow 8 $ scale 100 3000 sine1) # resonance "0.4"
+] |*| gain "0.85"
+
+hush
