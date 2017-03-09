@@ -1,0 +1,21 @@
+cps (50/120)
+
+d1
+$ every 2 (stut 2 0.5 1.75)
+$ stack [
+  iter 4
+  $ brak
+  $ every 4 (density 2)
+  $ superimpose ((rev).(density 2).(|*| speed (iter 4 "1.5 -0.5 1 -1")).(# pan (scale 0.25 0.75 rand)).(|*| gain "0.8"))
+  $ stack [
+    sound "dr(8,8)" # n (iter 4 "0 5 6 8 9 10 12 13 14") # coarse "2 4 6" # speed (choose [0.8, 0.7, 0.5]) # shape "0.3" # gain "0.87",
+    sound "glitch:2/2"
+  ] |*| gain "0.7 1 1 1 0.8 1 1 1",
+  superimpose ((density 2).(0.25 ~>).(|*| gain "0.8").(|*| speed (iter 4 "0.75 -0.5 0.5 1.5")).(# cutoff (iter 3 "2000 1000 500 1000"))) $ whenmod 4 2 brak $ sound "[[auto:5, jungle:6, ifdrums]([3 5 4]/3,8,[0 3 0 5]/4), [ifdrums:2, odx:1](1,8,[4 5]/2)]" # coarse "4 6" # speed (palindrome "1 0.7 0.5") # shape "0.5" # gain "0.9" # resonance "0.15",
+  sound "[808:1, auto:10]([16 8 12],16,[0 4 10]/3)" # speed "1.1" # coarse "4" # gain (slow 8 "1 0"),
+  stut 4 0.5 0.25 $ sound "bass3" # gain "1.3" # speed "0.65" # shape "0.2" # cut "1",
+  (4 ~>) $ superimpose ((0.25 ~>).(|*| speed "0.4 -0.25")) $ stut 24 0.5 1.5 $ sound "rave:2/8" # speed "0.9" # gain "0.9",
+  sound "909" # gain "1.35"
+]
+
+hush
