@@ -1,0 +1,42 @@
+cps (60/120)
+
+d1
+$ every' 4 2 (stut 2 0.5 1.25)
+$ every' 8 6 (within (0.25, 0.75) (slow 2))
+$ stack [
+  sound "bass3(1,8,7)" # shape "0.2" # speed "0.6" # hcutoff "60",
+  superimpose (
+    (0.125 ~>).
+    (|*| gain (slow 4 $ scale 0.5 0.75 $ sine1)).
+    (|*| speed (iter 4 "[1.5 0.75 0.5]/3")).
+    (slowspread density [1, 2, 0.5, 4]).
+    (slowspread slow [1, 4, 2]).
+    (stut 5 0.8 1.25).
+    (brak).
+    (# hcutoff "200")
+  )
+  $ every 4 (within (0.0, 0.5) (density 2))
+  $ stack [
+    sound "[909](4,16)" # speed "0.7" # shape "0.4" # coarse (iter 4 "6 8 4 2"),
+    whenmod 16 8 (|*| gain "0") $ sound "808:1(16,16)" # gain (density 8 "[1.2 0.8]") # speed "0.9",
+    every' 2 1 (stut 2 0.7 0.4) $ sound "ifdrums:2(2,16,8)" # speed "0.6" # gain "0.67" # shape "0.4"
+  ] |*| gain "0.9",
+  superimpose (
+    (palindrome).
+    (0.125~>).
+    (|*| gain "0.9").
+    (|*| pan (scale 0.25 0.75 $ sine1)).
+    (|*| speed (iter 8 "1 1.5 -1 0.75 1.25")).
+    (# hcutoff "100")
+  )
+  $ brak
+  $ every 2 (stut 2 0.5 1.25)
+  $ iter 4
+  $ stack [
+    sound "[909, ifdrums](3,8,[0 2 3]/3)" # shape "0.3" # speed "0.8" # gain "0.9" # coarse "4",
+    sound "[auto:6](1,8,[4 4 4 6]/4)" # speed "0.7" # gain "1" # coarse "[2 4 6]/3",
+    sound "[808:1](7,8,[4 4 4 6]/4)" # speed "1.2" # gain "1" # coarse "8 12 6"
+  ]
+]
+
+hush
