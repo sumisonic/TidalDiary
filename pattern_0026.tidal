@@ -1,0 +1,30 @@
+cps (65/120)
+
+d1
+$ every' 8 6 (within (0.0, 0.25) (slow 2))
+$ stack[
+  superimpose(
+    (|*| gain "0.9").
+    (|*| speed (density 3 "2 1.5 0.9 -0.7")).
+    (|=| pan (scale 0.25 0.75 (density 3 sine1))).
+    (spread (~>) [0.25, 0.125, 0.75]).
+    (brak).
+    (every' 4 2 $ density 2)
+  )
+  $ spread (slow) [1,2]
+  $ stut 2 0.7 1.25
+  $ iter 4
+  $ stack[
+    sound "auto:5(1,8,7)" # shape "0.4" # speed "0.8" # coarse "4",
+    sound "[ifdrums, voodoo](3,8,<0 3 6>)" # shape "0.5" # speed "0.7" # coarse "6" # gain "0.85",
+    iter 4 $ sound "[ifdrums:2(<1 2 1 3>,8,3)]" # speed (iter 4 "0.5 0.7 0.6") # coarse "5" # gain "0.75" # cutoff 2000  # resonance "0.2",
+    sound "808:1*8"
+  ] |*| gain (density 4 "0.8 1 1 1"),
+  sound "[bass3:6/2]" # shape "0.6" # coarse "6",
+  sound "[909, 808bd:1](<3 4>,8,7)" # shape "0.5" # speed "0.8" # coarse "4",
+  sound "808:1(14,16,<0 14>)" # shape "0.2" # pan (scale 0.1 0.9 (density 2 sine1)),
+  slow 5 $ sound "[jungbass:5, jungbass:6(<1 1 2>,3,1)]",
+  jux (0.25 ~>) $ stut 8 0.5 1 $ sound "~ [padlong]/6" # speed "0.6" # gain "0.9"
+]
+
+hush
