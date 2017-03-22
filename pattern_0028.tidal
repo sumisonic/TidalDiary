@@ -1,0 +1,36 @@
+cps(80/120)
+
+d1
+$ every' 4 1 (0.25 <~)
+$ every' 8 0 (within (0.0, 0.5) (slow 2))
+$ stack[
+  jux ((rev)) $ slow 2 $ spin 12 $ loopAt 1.25 $ sound "[invaders:4, industrial:7]/4" # gain "0.6",
+  whenmod 8 7 (# gain 0) $ sound "jungbass:4(1,4,<0 3>)" # shape "0.2" # coarse "4" # up "-5" # gain "1.1",
+  every 6 (slow 1.5) $ spread (slow) [2, 4, 3] $ sound "[[auto:3]/2, [909, ifdrums/4](<3 2 3 1>,8,<3 0>)]" # speed "0.8" # shape "0.5" # coarse "<4 6>",
+  sound "808:1(<2 3 4>,8,1)" # speed "1.1" # coarse "2" # pan (density 2 $ scale 0.2 0.8 sine1) # gain "0.95",
+  spin 4 $ sound "~ ~ wind:1/4 ~" # speed "-0.75" # coarse "6",
+  sound "[~ ~ ~ [gretsch:3, auto:6]/4]" # shape "0.4" # speed "<0.6 0.7>" # coarse "<6 8 4>" # gain "1.05",
+  superimpose (
+      (0.125 ~>).
+      (|*| gain 0.8).
+      (|*| coarse "<2 3 1>").
+      (|*| speed "<0.9 0.8 -0.8 0.75>").
+      (every 3 $ density 2).
+      (|*| pan (slow 2 $ scale 0.2 0.8 sine1)).
+      (brak)
+  )
+  $ every 4 brak
+  $ every' 8 4 ((slow 2))
+  $ iter 4
+  $ whenmod 8 4 (stut 2 0.7 1.25)
+  $ stack [
+    every 2 (slow 2) $ degradeBy 0.2 $ sound "[feelfx:4](3,3)" # coarse "<4 6 8 12>" # gain "0.9" # pan (density 4 $ scale 0.2 0.8 sine1),
+    spread (slow) [2, 4] $ wedge (1/2)
+    (sound "gretsch:0(3,8,1)" # shape "0.2" # coarse "8" # speed "0.7")
+    (sound "lt:2(2,8,2)" # shape "0.5" # coarse "4" # speed "0.7"),
+    sound "glitch2:2/2",
+    sound "industrial/3"
+  ] |*| gain "0.5 1 1 1 1 1 1 1"
+]
+
+hush
