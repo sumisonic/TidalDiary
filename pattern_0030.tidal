@@ -1,0 +1,41 @@
+cps (65/120)
+
+let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+
+d1
+$ whenmod' 32 16 23 ( (# room (density 7 $ tri1 * 0.8)).(# size (density 7 $ scale 0.5 1 tri1)) )
+$ stack [
+  every 4 (slow 2)
+  $ superimpose (
+    (every 3 (density 2)).
+    (|*| gain (density 4 $ scale 0.5 0.9 $ sine1)).
+    (# up "<0 -3 2/2>").
+    (# coarse "<1 2 3>")
+  )
+  $ every' 8 7 (# gain "0.8") $ spread spin [8, 10, 6, 12] $ sound "glitch:5" # up (slow 2 "<-12 -13>"),
+  (10 ~>) $ spread spin [16,12] $ slow 3 $ spread (loopAt) [1,2] $ sound "sn:4" |*| speed "-1" # coarse "2" # gain "0.7",
+  whenmod' 32 16 24 (# gain (slow 2 "1 0 0 0 0 0 0 0"))
+  $ stack [
+    sound "808bd:1*2" # gain "1.1" # coarse "6",
+    iter 4 $ sound "[future:2, 909](1,6)" # shape "0.5" # coarse "8" # speed "0.8" # gain "0.8"
+  ] # cutoff "200",
+  iter 8 $ sound "[jungbass:1](3,8)" # shape "0.3" # up "<-5 -6expression -> expression",
+  (0.25 ~>) $ iter 6 $ sound "peri:2" # speed "1.3",
+  superimpose (
+    (|*| gain "0.7").
+    (rev).
+    (spread slow [2, 3]).
+    (|*| speed "<0.75 -1 0.8 1.2>")
+  )
+  $ brak
+  $ slow 2
+  $ stut 2 0.6 1.125
+  $ iter 4
+  $ stack [
+    sound "glitch2:4(5,12)" # shape "0.5" # coarse "2" # up "0 12 4",
+    sound "[bend:1, industrial:2](1/2,4,2)" # shape "0.5" # speed "0.7" # coarse "2",
+    slow 2 $ sound "glitch2:2(2,6)" # shape "0.5" # coarse "3" # gain "0.8"
+  ] |*| gain "0.9"
+] # room "<0 0.2>" # size (density 4 "<0 0 1>")
+
+hush
