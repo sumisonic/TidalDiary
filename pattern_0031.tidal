@@ -1,0 +1,32 @@
+cps (65/120)
+
+do
+  d1
+    $ off 1.5(
+      (slow 2).
+      (iter 8).
+      (# gain 0.9).
+      (# coarse"<4 6>").
+      (# speed"-0.9 0.5")
+    )
+    $ every' 4 2 (0.5 <~)
+    $ every' 4 3 (density 2)
+    $ every' 8 7 (stut 4 0.5 0.5)
+    $ iter 8
+    $ sound "{[feel, odx](1,4,2), [909, ifdrums](<3 1 2>,<8>,<0 3 6>)}" # up"-2" # coarse 6 # shape 0.3 # gain "1.2"
+  d2
+    $ every 3 (0.25 <~)
+    $ every' 4 3 (stut 8 0.5 0.5)
+    $ sound "{cp(1,4,<2 1>),glitch:2(1,4,<0 3>),808:1(8,<12 16>,<0 1>)}" # shape "0.5" # up 2 # pan (density 4 $ scale 0.25 0.75 sine1) # gain "1.1"
+  d3
+    $ off 2.5 ((stut 3 0.6 0.5).(|*| speed (slow 4 "-1")))
+    $ sound "bass3/2" # up "-4" # shape 0.5 # gain 1.1 # coarse 6
+  d4
+    $ whenmod 4 3 (# gain "0.5")
+    $ off 0.5 ((|*| gain "0.8").(density 2).(|*| speed "-0.5 -0.25"))
+    $ stack[
+      iter 4 $ sound "industrial(<3 2>,<3 4>,<0 2/3>)" # n "<1 3 8>" # shape "0.5" # speed "-0.5" # gain "0.9" # coarse "4",
+      spin 16 $ sound "[peri:8](3/4,5)" # speed "-4 -2" # gain "0.9"
+    ] |*| gain (slow 8 $ scale 0.8 1 tri1)
+
+hush
