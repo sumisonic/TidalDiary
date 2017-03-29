@@ -1,0 +1,23 @@
+cps (65/120)
+
+do
+  d1
+    $ off 1.25 ((|*| gain 0.8).(|*| speed (iter 4 "0.8 0.6 -1 0.9")).(spread (density) [1, 2]))
+    $ every 4 (within (0.125, 0.375) (# gain 0))
+    $ every' 8 7 (within (0.0, 0.5) (stut 8 0.5 0.5))
+    $ whenmod 4 2 (iter 8)
+    $ every' 4 2 (slow 2)
+    $ stack [
+      gain "1.1 1 0 1 0 1 0 0.9" # sound "[ifdrums,909]" # accelerate 0.5 # shape 0.5 # speed 0.8 # coarse 4,
+      gain "0 0 0 1 0 0 0 0" # sound "[feel:6, glitch:2]" # shape 0.5 # speed 0.7 # coarse 3 |*| gain 1.1,
+      gain "0 0 1 [0 0.9] 0 0 1 [0 0.9]" # sound "[feel:2, auto:2]" # speed 0.8 # shape 0.5 # coarse 2 |*| gain 0.9
+    ]
+  d2
+    $ gain "1 0 0 0 0 1 0 0" # sound "bass3" # shape 0.5 # coarse 4 # up "-5"
+  d3
+    $ every' 4 3 (spin 8)
+    $ gain "1 0 0 0 0 0 0 0" # sound "cp" # speed "-2"
+  d4
+    $ jux ((# up 12).(|*| gain 0.8).(0.5 ~>).(rev)) $ spin 8 $ striate 16 $ sound "wind:0(1/4,4,2)" # gain 0.9 # coarse 4 # room 0.9 # size 0.9 # orbit 1
+
+hush
