@@ -1,0 +1,33 @@
+cps (45/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ every 2 (within (0.25, 0.75) $ (# delay 0.5))
+    $ whenmod' 24 12 16 (|*| gain 0)
+    $ off 0.25 (
+      (|*| gain 0.75).
+      (# pan (density 2 $ scale 0.25 0.75 sine1)).
+      (|*| speed (iter 4 "0.7 0.5 0.4 -0.75")).
+      (iter 8).
+      (every' 4 2 $ slow 2)
+    )
+    $ every' 4 3 (density 2)
+    $ every' 3 2 (within (0.25, 0.75) (slow 2))
+    $ whenmod 4 2 (iter 4)
+    $ every' 8 6 brak
+    $ stack [
+      gain "[1 0.8/2] 1 0 1 [0 1/2] 1 0 1/3" # sound "[auto:5(1,8), 909]" # speed 0.8 # coarse 6 # shape 0.4,
+      gain "0 0 1 0 0 0 1 0" # sound "[ifdrums:2, auto:6]" # speed 0.8 # coarse "<4 6 8>" # shape 0.2 |*| gain 0.95,
+      gain "0 1 0 [0 1] [0 1] 0 1 1" # sound "chin:1" # speed 0.8 # coarse 2 # gain 1.2
+    ] # delaytime (0.5/3) # delayfeedback 0.5 # orbit "0"
+  d2
+    $ gain 1.1 # sound "jungbass:1" # shape 0.5 # coarse 2 # up (-3)
+  d3
+    $ (0.5 <~)
+    $ stack [
+      off 1 (# up "-25") $ spin 8 $ striate 16 $ sound "padlong:2/2" # up "-14" # coarse 7 # gain 0.7,
+      sound "chin*12" # shape "0.2" # coarse "<0 2 4 6 8 12>" # gain 0.9 # pan sine1
+    ] # room 0.9 # size 0.9 # orbit "1"
+
+hush
