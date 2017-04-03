@@ -1,0 +1,20 @@
+cps (65/120)
+
+do
+  d1
+    $ stack [
+      iter 4 $ sound "glitch2:4(<8 6>,24)" # shape 0.5 # gain 0.8 # coarse "<6 4 8>" # speed (1.1) # cutoff (slow 4 $ scale 1000 6000 sine1) # resonance 0.2,
+      sound "[chink/2, insect(1,4,3)]",
+      loopAt 1 $ sound "[industrial:3/3, industrial:5/2, industrial:17]" # speed "<1 -1 1>" # cutoff (slow 4 $ scale 800 1500 sine1) # resonance 0.2 # gain 0.7,
+      (0.25 ~>) $ loopAt 0.25 $ spin 4 $ sound "sid:9/12" # speed (-1) # cutoff (slow 32 $ scale 2000 8000 sine1) # resonance 0.5
+    ] |*| gain 0.8 # room 1.0 # size 0.9 # orbit 1
+  d2
+    $ interlace
+    (sound "[ifdrums](<3 4 2>,<8 6>)" # speed 0.7 # shape 0 # coarse 6 # gain 1 # cutoff 800)
+    (sound "[bd,909](3,<6 8 12>)" # cutoff 1200 # speed 0.9 # gain 0.9 # shape 0)
+  d3
+    $ gain "0 0 1" # sound "bass3" # shape 0.5 # gain 1.1 # up (-5) # cutoff 100
+  d4
+    $ gap 8 $ sound "808:1*8" # gain 0.9 |*| gain (slow 16 envL)
+
+hush
