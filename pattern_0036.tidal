@@ -1,0 +1,31 @@
+cps (-1)
+
+cps (65/120)
+
+do
+  d1
+    $ off 0.25 ((|*| gain 0.85).(slow 2).(|*| speed "<-1 1 1.5>").(|*| coarse 2))
+    $ stack [
+      spread (loopAt) [0.5, 1.0, 0.75] $ spread (spin) [3, 1, 4, 2] $ sound "can" # n "<0 1 2>" # speed "<-1 1>" # coarse 6 # cutoff (slow 8 $ scale 800 12000 sine1) # resonance 0.2,
+      slow 1.5 $ sound "flick:1(1/2,4,2)" # cutoff 1200 # resonance 0.3 # shape 0.2 # speed 0.5,
+      sound "chin:2(3,6)" # coarse (iter 6 "3 4 5") # speed 1.5,
+      every 3 (0.5 <~) $ sound "sundance:4(<6 5>,2,<0,1,4>)" # speed (density 6 "-1 1") # end "0.5 0.25 0.75" # cutoff (slow 8 $ scale 800 8000 sine1) # resonance 0.2 # gain (slow 4 $ scale 0.7 1.0 sine1) |*| gain (slow 8 envL),
+      (0.25 ~>) $ sound "[industrial:25/2, industrial:14/3]" # speed (iter 8 "<-0.5 0.5>") # coarse 6 # cutoff 1200
+    ] # room 1.0 # size 0.9 # orbit "1" |*| gain 0.7
+  d2
+    $ iter 4
+    $ stack [
+      sound "ifdrums([3 4],<8 6>,<0 2 3>)" # cutoff 600 # shape 0.5 # speed 0.7,
+      sound "[808bd, 909](4,8)" # cutoff 1200 # shape 0.5 # speed 0.8 # coarse 6 # gain (slow 4 $ scale 0.5 1.0 sine1),
+      stack [
+        sound "lt:1(<8 10>,<12 12 8>,<0 3 2 1>)" # cutoff 800 # gain 0.8 # coarse 6 # speed 0.7,
+        every 4 (density 2) $ sound "chin:1(8,16)" # hcutoff 5000 # hresonance 0.2 # pan (density 3 sine1) # gain 1.1
+      ] |*| gain (slow 4 envL)
+    ]
+  d3
+    $ stack [
+      sound "glitch:2/2" # speed 0.7 # gain 0.9,
+      gain "1 0 1 0" # sound "jungbass:1" # up (-4) # shape 0.5 # cutoff 100
+    ]
+
+hush
