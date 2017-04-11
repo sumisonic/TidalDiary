@@ -1,0 +1,34 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ off 0.75 ((slow 1.5).(|*| gain 0.85).(|=| coarse (iter 4 "6 4 7 8")).(|*| speed (density 3 $ "0.7 0.8 -0.9 0.5")))
+    $ every' 4 1 (stut 2 0.8 1.75)
+    $ every' 4 3 (within (0.5, 1.0) $ slow 2)
+    $ every' 4 2 (iter 4)
+    $ stack [
+      gain "1.3 0 0 1 0 1 0 0.9" # sound "[ifdrums, future:0]" # shape 0.5 # speed 0.7 # coarse 6 # cutoff 2000 |*| gain 1.2,
+      whenmod' 32 0 8 (# gain 0) $ whenmod 8 4 (slow 2) $ stut 4 0.5 (1/6) $ sound "808:1*8" # gain (density 16 $ scale 0.8 1 sine1) # coarse 2 # pan (density 4 $ scale 0.25 0.75 sine1) |*| gain 1.1,
+      every' 4 2 (stut 8 0.5 0.5)
+      $ stack [
+        slow 2 $ sound "[ifdrums:2, flick:1](1,8,6)" # shape 0.5 # speed 0.5 # coarse 6 # cutoff 6000 # gain 0.9,
+        slow 1.5 $ sound "[sn:2](1,8,4)" # shape 0.3 # speed 0.5 # coarse 4 # gain 0.9 # cutoff 4000
+      ]
+    ] # room 0.06 # size 0.7
+  d2
+    $ stack [
+      (0.5 ~>) $ sound "jungbass:4/2" # shape 0.5 # up "-3" |*| gain 1.2,
+      stut 12 0.5 0.75 $ gain (slow 2 $ "1 0 [0 0.9] 0 1 0 0 0.9") # sound "[odx, lt:5]" # speed "0.5 0.5 0.6" # cutoff 600 # resonance 0.1 # hcutoff 150 # hresonance 0.2 # shape 0.5 |*| gain 0.8,
+      sound "[bd:2, 909]*2" # shape 0.5 # gain 1.2 # speed 0.8 # coarse 6 # cutoff 1200 # resonance 0.2
+    ]
+  d3
+    $ stack [
+      stut 4 0.5 0.75 $ slow 3 $ (0.75 ~>) $ every 3 (# up (-11)) $ sound "can" # gain 1.2 # up (-12) # coarse 4 # gain 0.9,
+      loopAt 1 $ sound "industrial:12" # speed (-1) # gain 0.8,
+      density 1.5 $ sound "lighter" # gain 0.9,
+      sound "chin:1*6",
+      gain "0 1 0" # sound "ssa"
+    ] # room 1.0 # size 0.9 # delay 1.0 # delaytime 0.3 # delayfeedback 0.8 # orbit 1 |*| gain (slow 16 envL * 0.9)
+
+hush
