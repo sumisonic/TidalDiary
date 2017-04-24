@@ -1,0 +1,24 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ stack [
+      stut 2 0.75 1 $ sound "ab:2" # speed 0.25 # coarse 2 # cutoff (slow 8 $ scale 300 1200 sine1) # resonance 0.1 # hcutoff 100,
+      sound "ab:8/2" # speed 0.8,
+      whenmod' 16 0 8 (# gain 0) $ sound "ab:7(3,6,7)" # coarse 2 # speed 0.9 # gain 0.9,
+      every' 8 7 (0.5 <~) $ off 1 ((# up (-18)).(|*| gain (slow 12 envL))) $ sound "ade:3/2" # up (-16) |*| speed (-1) # cutoff 1200 # resonance 0.1 # hcutoff 200 # gain 0.8,
+      sound "ade:9" # gain 0.8,
+      whenmod' 12 0 6 (# gain 0) $ sound "glitch:5(1,8,2)" # gain 0.9,
+      stack [
+        stut 4 0.8 0.25 $ gain "1*4" # sound "techno" # coarse "<2 4 6 8>" # speed 0.7 # shape 0.9 |*| gain 0.6,
+        sound "jungbass:1(<3 2>,8)" # gain 0.9
+      ] |*| gain (slow 16 envL)
+    ] # room 0.9 # size 0.9 # delay 1 # delaytime (slow 8 $ scale 0.25 0.33 tri1) # delayfeedback 0.7 # orbit 1 |*| gain 0.9
+  d2
+    $ stack [
+      slow 2 $ sound "[ifdrums, 909](<2 3>,8)" # speed 0.8 # cutoff 200 # resonance 0.1 # gain 0.9
+    ]
+
+
+hush
