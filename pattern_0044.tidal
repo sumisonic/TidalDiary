@@ -1,0 +1,31 @@
+cps (45/120)
+
+do
+  d1
+    $ off 0.75 ((|*| gain 0.8).(iter 8).(slow 1.25).(|*| speed "0.7 0.8 -0.9 0.75").(# coarse "8 12 6 5 4 9").(# pan (fast 2 $ sine1)))
+    $ stack [
+      every' 3 2 (fast 1.5) $ stut 4 1 0.25 $ sound "ifdrums*8" # hpf 200 # lpf (slow 4 $ scale 400 800 sine1) # lpq 0.2 # up (iter 4 "2 0 4 12 -12 -5 0 8") # shape 0.1 # coarse 8 # legato 2 |*| speed 0.75 # gain 0.9,
+      sound "ifdrums" # shape 0.5 # lpf 800 # speed 0.7 # gain 1.2,
+      sound "909(3,8,2)" # shape 0.5 # speed 0.8 # gain 1.1,
+      stut 3 0.75 0.25 $ sound "bass3:6*3" # shape 0.5 # coarse 4 # gain 1.1
+    ]
+  d2
+    $ off 1.25 ((|*| gain 0.8).(slow 1.5).(# speed "0.5 1.5 0.75 -0.5").(# coarse "2 8 4 6"))
+    $ stack [
+      stut 4 0.75 1 $ sound "glitch:4*6" # lpf (slow 8 $ scale 2000 1000 sine1) # lpq 0.3 # gain 1,
+      stut 3 0.25 1.5 $ sound "flick:4(1/2,8,5)" # coarse 2 # speed 0.5 # gain 0.9,
+      sound "stomp:3(1,8,4)",
+      loopAt 1.5 $ sound "[industrial:2, industrial:11]" # shape 0.3 # hpf 100 # gain 0.7 # speed (-1),
+      spin 4 $ sound "sid/4" # speed 0.5 # coarse 5 # shape 0.1 # gain 0.9,
+      stut 4 0.75 0.25 $ sound "sid:3*8" # up (fast 3 "<0 3 7 6>") # lpf 600 # lpq 0.2 # gain 0.9 |*| gain (slow 8 envL) # legato 0.1,
+      sound "auto:6(1/4,4,3)" # shape 0.5 # speed 0.6 # gain 1.1 # coarse 6 # legato 0.5
+    ] # room 1.0 # size (slow 6 $ scale 0.9 0.99 sine1) # orbit 1 |*| gain 0.8
+  d3
+    $ iter 4
+    $ stack [
+      stut 4 0.5 0.25 $ sound "mt:2(7,16,<0 1>)" # lpf 2000 # lpq 0.1 # speed 0.75 # coarse 6 # gain 0.8,
+      every 2 (fast 1.5) $ gain "[0.5 1.1]*6" # sound "808:1" # coarse 2 # speed 1 # legato 0.1 # pan (scale 0.25 0.75 sine1),
+      sound "noise2:1*6" # coarse 2
+    ] |*| gain (slow 12 envL)
+
+hush
