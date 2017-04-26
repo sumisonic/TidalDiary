@@ -1,0 +1,20 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ stack [
+      stut "<2 3>" 0.6 0.5 $ loopAt 1 $ spin "<8 4 6>" $ chop (density 1.5 $ "<32 16>") $ sound "feelfx:4/2" # lpf (slow 8 $ scale 2000 3000 sine1) # lpq 0.2 # shape 0.2,
+      stut "<6 6 8 12>" 0.9 0.5 $ slow 3 $ sound "sine:0(8,8)" # up (density 1.5 $ iter 4 "-6 -2 4") |+| up "-12" # legato 0.1 # lpf 1200 # lpq 0.3 |*| speed "-1" # gain (slow 4 envL * 0.8),
+      stut "<4 2 6>" 0.5 0.25 $ every' 3 2 (density 1.5) $ sound "sid*6" # speed "-2" # hpf (slow 4 $ scale 200 400 sine1) # hpq 0.2 # legato "0.75 0.5>" # shape 0.2 # pan (fast 2 $ scale 0.25 0.75 sine1) # gain (slow 8 envL),
+      stut 3 0.5 0.75 $ loopAt 2 $ sound "auto:3/2" # coarse 6 # shape 0.3,
+      loopAt 1 $ sound "[industrial:12/2, industrial:21]" # speed "-1" # coarse 6 # lpf 800 # gain 0.8
+    ] # room 1.0 # size 0.9 # delay (slow 8 $ scale 0.5 1.0 sine1) # delaytime (slow 4 $ scale 0.005 0.0055 tri1) # delayfeedback 0.5 # orbit 1 |*| gain 0.9
+  d2
+    $ whenmod' 64 28 64 (# gain 0)
+    $ stack [
+      sound "jungbass:1" # shape 0.5,
+      sound "lt(6,8,<1 4>)" # lpf 1200 # lpq 0.1 # shape 0.2 # speed 0.5 # coarse 6
+    ] |*| gain (slow 8 envL)
+
+hush
