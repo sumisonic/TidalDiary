@@ -1,0 +1,32 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ off 1.25 (
+        (|*| gain (slow 4 $ scale 0.75 0.95 sine1)).
+        (iter 8).
+        (slow 1.5).
+        (stut 4 0.5 0.5).
+        (|*| speed "1.5 0.75 -0.5 0.8").
+        (# coarse "6 8 12")
+      )
+    $ stack [
+      sound "[909, ifdrums](2,8,<0 3>)" # shape 0.5 # coarse 4 # speed 0.8 # gain 1.1,
+      stut "<3 4>" 0.75 0.5 $ sound "rm*3" # hpf (slow 4 $ scale 100 120 sine1) # hpq 0.4 # speed (slow 8 $ scale 0.75 1 sine1) # coarse 6 # gain 0.9 |*| gain (slow 8 envL)
+      sound "less" # shape 0.5 # coarse 6 # gain 0.95,
+      sound "less:3(1/2,8,3)" # legato 8 # shape 0.5 # speed 0.8 # coarse 4 # gain 1.1,
+      sound "glitch:4*16" # gain 1.2 # pan sine1,
+      gain "1" # sound "bass3" # shape 0.5 # up (-5) # gain 1.1,
+      whenmod' 64 0 16 (# gain 0) $ gain "[0.7 1]*4" # sound "808:1" |*| gain 1.2
+    ] |*| gain 1
+  d2
+    $ stack [
+      striate 32 $ sound "metal(<4 2 6 3>/2,8)" # coarse 6 # speed 0.75,
+      stut "<6 3 4>" 0.5 0.5 $ sound "monsterb:2(1/2,8,3)" # speed 0.75,
+      chop "<8 4>" $ sound "procshort" # speed 0.25 # lpf 2000,
+      sound "sine:2(1,4,<0 1>)",
+      stut 8 0.5 1 $ chop "<6 8 4>" $ spin "<8 12>" $ sound "sid:3(1,4,3)" # shape 0.5 # speed "<2 1.5>" # gain (slow 4 $ scale 0 0.7 sine1) |*| gain (slow 8 envL)
+    ] # room 1.0 # size 0.95 # orbit 1 |*| gain 0.9
+
+hush
