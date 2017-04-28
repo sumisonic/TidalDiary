@@ -1,0 +1,48 @@
+cps (55/120)
+
+do
+  d1
+    $ off 1.25 (
+        (|*| gain 0.8).
+        (stut "<6 4>" 0.5 "<1.5 0.5 1.25>").
+        (slow 1.5).
+        (brak).
+        (iter 8).
+        (|*| speed (fast 2 $ "0.75 1.25 -0.75 0.9")).
+        (# coarse (iter 4 "6 8 12 4")).
+        (# hpf 200).
+        (# lpf (slow 2 $ scale 2000 8000 tri1)).
+        (# lpq 0.1)
+      )
+    $ stack[
+      every 3 (stut 6 0.5 0.25)
+      $ every' 4 3 (0.125 ~>)
+      $ stack [
+        sound "[909, auto:5]" # shape 0.5 # gain 1.1 # coarse 8,
+        sound "jungbass" # shape 0.5 # gain 1.2
+      ],
+      iter 4 $ gain "[1 1] 0 0 1 [0 1] 1 0 1" # sound "[ifdrums, auto]" # shape 0.5 # speed 0.7 # coarse 4 |*| gain (slow 3 $ scale 0.5 1.1 sine1),
+      gain "0 0 1 0 0 0 1 0" # sound "odx:1" # shape 0.5 # speed 0.9 # coarse 6,
+      gain "0 0 0 1 0 0 0 0" # sound "odx:4" # shape 0.5 # speed 0.8 # coarse 4,
+      gain "[0.7 1]*8" # sound "odx:2" # pan (fast 4 $ scale 0.25 0.75 sine1) |*| gain 0.8,
+      (0.125 ~>) $ iter 4 $ stut "<4 3>" 0.6 0.25 $ sound "lt:6*8" # speed 0.8 # shape 0.5 # coarse 6 # lpf (slow 1.5 $ scale 400 600 sine1) # lpq 0.1 # hpf 100 # gain (fast 4 $ scale 0.6 1.1 sine1)
+    ]
+  d2
+    $ off 0.75 (
+        (|*| gain 0.8).
+        (stut 4 0.5 0.25).
+        (slow 1.5).
+        (iter 4).
+        (# speed (iter 4 "1.5 0.5 0.75 -0.75"))
+      )
+    $ stack [
+      slow 1.5 $ sound "rave:3" # speed (-0.7),
+      stut 4 0.75 0.25 $ sound "miniyeah*2" # coarse 6 # gain (slow 2.5 $ scale 0.8 1.2 sine1),
+      sound "industrial:17(1,8,3)" # coarse 6,
+      sound "insect(3,8)" # coarse 2,
+      sound "glitch:4*4" # shape 0.5 # gain 1.2 # coarse 2,
+      loopAt 2 $ sound "industrial:20" # gain 0.9 # speed (-1),
+      sound "bass3*4" # speed (0.5) # gain 1.2
+    ] # room 1 # size 0.95 # orbit 1 |*| gain 0.71
+
+hush
