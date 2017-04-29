@@ -1,0 +1,36 @@
+cps (65/120)
+
+do
+  let p1 = sound "[auto:5/2, [ifdrums, 909](<3 3 4 4>,8,<0 5>)]" # shape 0.5 # speed 0.7 # coarse 6
+  let p2 = sound "~ ~ ifdrums:2 glitch:2" # shape 0.5 # speed 0.4 # coarse 6 # legato 0.75 # gain 0.8
+  let p3 = sound "jungbass*3" # shape 0.5
+  let p4 = stut (iter 4 "4 3") 0.8 0.25 $ sound "lt*4" # coarse 6 # speed (scale 0.9 1.0 sine1) # hpf 100 # gain 0.9
+  let p5 = gain "[0.5 1]*4" # sound "808:1" |*| gain 1.1
+  d1
+    $ every' 8 7 (trunc 0.75)
+    $ every 3 (within (0.25, 0.75) (slow 2))
+    $ stack[
+      p1,
+      every' 4 3 (stut (choose [4,8,6]) 0.5 0.5) $ p2,
+      p3,
+      p4,
+      p5,
+      (0.125 ~>) $ slow 1.5 $ iter 4
+      $ stack [
+        brak $ p1,
+        spin 3 $ p2,
+        slow 1.5 $ p4 # pan (scale 0.25 0.75 sine1),
+        p5
+      ] |*| gain 0.8
+      # speed (choose [0.5, (-0.75), 0.75, 0.8])
+      # coarse (choose [9, 8, 12])
+      # hpf 200
+    ] # room 0.1 # size 0.5
+  d2
+    $ stack [
+      (36 ~>) $ off 1.5 (|+| up "<12 4>") $ iter 8 $ stut 32 0.5 2.0 $ sound "~ [~ sundance:3/2] ~ ~" # up "12" # shape 0.4 # pan sine1,
+      slow 1.5 $ sound "industrial:17/3" # speed (-0.3) # gain 0.9,
+      sound "~ glitch:2/2"
+    ] # orbit 1 # room 1 # size 0.95 # delay 1 # delaytime 0.75 # delayfeedback 0.9 |*| gain 0.9
+
+hush
