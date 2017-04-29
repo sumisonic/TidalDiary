@@ -1,0 +1,40 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ off 1.25 (
+        (|*| gain (slow 4 $ scale 0.5 0.7 sine1)).
+        (# hpf 200).
+        (stut 2 0.5 1.25).
+        (slow 1.5).
+        (iter 4).
+        (# speed (fast 1.5 $ "0.5 0.75 -0.5 1.2")).
+        (# coarse (fast 2 $ "6 8 12")).
+        (# orbit 1).
+        (# room 1).
+        (# size 0.95)
+      )
+    $ stack[
+      every' 3 2 (stut "<6 4>" 0.5 0.25)
+      $ every' 2 1 (0.125 ~>)
+      $ stack [
+        sound "auto:5, 909" # shape 0.5 # speed 0.9 # coarse 6,
+        sound "jungbass" # shape 0.6 # gain 1.1,
+        sound "jungbass:6/2" # shape 0.5 # gain 0.9
+      ],
+      stut "<4 3>" 0.5 0.25
+      $ stack [
+        every' 3 2 (fast 1.5) $ sound "odx*4" # shape 0.5 # coarse 4 # speed 0.8 # gain (slow 4 $ scale 0.5 1.0 tri1) # pan (slow 6 $ scale 0.8 0.2 sine1),
+        every' 4 3 (fast 1.5) $ sound "feel*3" # shape 0.5 # coarse 6 # speed 0.7 # gain (slow 4 $ scale 1.0 0.5 tri1 * 1.1) # pan (slow 6 $ scale 0.2 0.8 sine1)
+      ] # lpf (slow 8 $ scale 1200 2400 tri1) # lpq 0.1,
+      stut "<4 3 2>" 0.5 0.25 $ sound "808lt*8" # shape 0.5 # speed "1.2 1.1" # hpf 120 # gain 1,
+      whenmod' 16 0 8 (# gain 0) $ gain "[0.5 1]*4" # sound "808:1" # pan (fast 2 $ scale 0.25 0.5 sine1) |*| gain 1.1
+    ]
+  d2
+    $ stack [
+      sound "pad:2*3" # speed (slow 8 "<0.7 0.6>"),
+      stut 6 0.8 0.5 $ slow 1.5 $ sound "industrial:24" # speed 0.5
+    ] # orbit 1 |*| gain 0.9
+
+hush
