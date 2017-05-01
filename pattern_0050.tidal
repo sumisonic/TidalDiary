@@ -1,0 +1,27 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ every' 8 7 (trunc 0.75)
+    $ every 3 (within (0.25, 0.75) (slow 2))
+    $ whenmod' 8 5 8 (iter 4)
+    $ stack[
+      every' 4 2 (0.125 ~>) $ sound "[feel:6/2, auto:5]" # shape 0.4 # speed 0.8 # coarse 6,
+      iter 4 $ stut 3 0.7 "<0.5 0.25>" $ sound "bass3(3,6,<2 1>)" # shape 0.5 # hpf 200 # up 0 # gain 0.85 # coarse 6 # lpf (slow 4 $ scale 400 2000 tri1) # lpq 0.1,
+      iter 4 $ stut 4 0.5 0.75 $ sound "jungbass(3,8,<0 1>)" # shape 0.4 # gain 1.2 # hpf 60 # up 2 # coarse 4,
+      (0.125 ~>) $ sound "bend*4",
+      (0.125 ~>) $ stut (choose [8, 12, 16]) 0.25 1 $ gain "[0.8 1] 0 0 0 0 0 0 0" # sound "[industrial:4]" # coarse 6 # shape 0.5,
+      stut (choose [4, 6, 8, 12]) 0.5 1 $ stut (choose [1, 2]) 0.8 0.125 $ slow 1.5 $ sound "[flick:1](1,8,<1 3>)" # coarse 6 # shape 0.2 # speed (choose [0.25, 0.5]) # gain (fast 3 $ scale 0.9 1 tri1) # pan (fast 12 $ scale 0.25 0.75 sine1),
+      sound "[909, ifdrums](<3 4>,8)" # shape 0.5 # gain (slow 8 $ scale 0.25 1 sine1) # coarse 6 # speed 0.8,
+      whenmod' 16 0 8 (# gain 0) $ gain "1*16" # sound "808:1" # pan "[0.25 0.75]*8" # speed 1 # coarse 2 # gain 1.1
+    ]
+  d2
+    $ stack [
+      sound "bend:3(1,8,3)" # coarse 4 # speed (-0.5),
+      slow 1.5 $ spin 4 $ sound "lighter" # speed (choose [1, 1.5]),
+      sound "industrial:20/6" # speed (-0.125) # gain 0.7,
+      sound "industrial:12/1.5" # speed (-1)
+    ] # room 1 # size (slow 8 $ scale 0.95 0.99 sine1) # orbit 1 |*| gain 0.9
+
+hush
