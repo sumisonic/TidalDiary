@@ -1,0 +1,34 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  let len = 8
+  let time = (8/3)
+  let kick = stack [sound "[909, 808bd]" # shape 0.5 # speed 0.8 # coarse 2 # gain 1.1, sound "ifdrums" # gain 0.8 # speed 0.8 # coarse 6 # legato 0.5]
+  d1
+    $ stack [
+      stack[
+        ((time*0) ~>) $ e 4 4 $ kick |*| gain (slow len $ scale 0 1 sine1),
+        ((time*1) ~>) $ e 6 3 $ kick |*| gain (slow len $ scale 0 1 sine1),
+        ((time*2) ~>) $ e 3 8 $ kick |*| gain (slow len $ scale 0 1 sine1)
+      ],
+      every 3 (within (0.25, 0.75) (slow 1.5))
+      $ stack [
+        sound "auto:4/2" # shape 0.5 # speed 0.7 # gain 1 # coarse 4,
+        sound "auto:5" # speed 0.8,
+        sound "glitch:2" # speed "0.7",
+        stut 4 0.5 0.25 $ sound "ifdrums*4" # hpf 200 # speed (slow 2 $ scale 1 1.1 sine1) # lpf (slow 4 $ scale 800 1200 tri1) # lpq 0.15 # shape 0.2 # coarse 6 # gain 1,
+        stut 12 0.5 1 $ (0.125 ~>) $ sound "bass3" # shape 0.5 # up (-3) # lpf 150 # legato 0.2 # gain 0.9,
+        slow 1.5 $ sound "bend:1(1,4,1)" # gain 1.25 # coarse 4 # shape 0.5
+      ],
+      whenmod' 32 0 16 (# gain 0) $ gain "[0.6 1]*4" # sound "808:1" # speed 1.1 # legato 0.1
+    ] # room 0.1
+  d2
+    $ stack [
+      sound "glitch/2" # gain 1.1,
+      stut 6 0.5 1 $ gain "0 1 0 0 0 0 0 0" # sound "click:2" |*| gain 0.9,
+      gain "0 1 0 0 0 0 0 0" # sound "sundance" |*| gain (slow 4 $ scale 0.8 1.1 sine1),
+      slow 1.5 $ gain "0 0 0 0 0 0 0 1" # sound "wind" # speed (choose [0.5, 0.75, 1]) |*| gain 1
+    ] # room 1 # size (slow 8 $ scale 0.99 0.95 tri1) # orbit 1 |*| gain 0.9
+
+hush
