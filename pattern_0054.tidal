@@ -1,0 +1,23 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ stack[
+      every 4 (0.125 ~>) $ sound "[jungbass:5,less]/2" # lpf 400 # hpf 40,
+      slow 2 $ sound "[future:3]*3" # speed 0.8 # shape 0.3 # coarse 2,
+      interlace (sound "future:1*6") (sound "future:1*8") # gain 0.8 # coarse 2 # speed 0.8,
+      stut 4 0.5 0.25 $ weave 4 (pan sine1) [(sound "glitch2*3"), (sound "glitch2*4")] # lpf (slow 4 $ scale 1200 2000 tri1) # lpq 0.1 # speed 1.25,
+      stut 6 0.5 0.25 $ sound "chin(3,8)" # coarse 6 # pan (slow 1.5 $ sine1),
+      stut 3 0.25 0.5 $ slow 1.5 $ sound "[industrial:6](1/2,8,4)" # speed 0.5 # shape 0.5 # coarse 2 # lpf 2000 # hpf 200 # gain (slow 8 $ envL * 1.1)
+    ] # room 0.1
+  d2
+    $ stack [
+      stut 2 1 1.5 $ loopAt 3 $ sound "koy" # hpf 150 # speed (-1) # gain 1.1,
+      sound "dr55:1*8",
+      stut 12 0.25 1 $ sound "industrial:26" # speed "-0.2" # hpf 100 # gain (slow 8 $ scale 0.4 1.0 tri1),
+      whenmod' 64 0 16 (# gain 0) $ sound "chink(1/4,8,5)" # speed 0.8 # gain 0.9,
+      whenmod' 64 0 8 (# gain 0) $ every 8 (# gain "0.8 0 0.8 [0.8 0.8]") $ gain "0*8" # up "0 0 2 [8 7]" # sound "sine" # legato 0.15
+    ] # room 1 # size (slow 8 $ scale 0.95 0.99 tri1) # orbit 1 |*| gain 0.8
+
+hush
