@@ -6,7 +6,7 @@ do
     $ every 3 (within (0.25, 0.75) (slow 1.5))
     $ every' 8 7 (within (0.5, 1) (stut 6 0.25 0.5))
     $ stack [
-      interlace (sound "ab:4*2") (sound "ab:4*3") # speed 0.8 # coarse 4,
+      iter 8 $ interlace (sound "ab:4*2") (sound "ab:4*3") # speed 0.8 # coarse 4,
       (0.125 ~>) $ stut 8 0.25 1.5 $ striate 16 $ sound "lt:2(3/2,8)" # speed 0.5 # coarse 6 |*| gain (slow 8 envL),
       sound "auto:4/2" # shape 0.5 # coarse 6 # speed 0.75 # hpf 100,
       gain "[0.75 1]*8" # sound "bd:8" # shape 0.3 # coarse 2 # speed (slow 4 $ scale 1.0 0.5 tri1) # hpf 160 # pan (fast 2 $ scale 0.25 0.75 sine1) |*| gain (slow 16 envL),
