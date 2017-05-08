@@ -1,0 +1,30 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ every 3 (within (0.25, 0.75) (slow 1.5))
+    $ every' 8 7 (within (0.5, 1) (stut 6 0.25 0.5))
+    $ stack [
+      interlace (sound "ab:4*2") (sound "ab:4*3") # speed 0.8 # coarse 4,
+      (0.125 ~>) $ stut 8 0.25 1.5 $ striate 16 $ sound "lt:2(3/2,8)" # speed 0.5 # coarse 6 |*| gain (slow 8 envL),
+      sound "auto:4/2" # shape 0.5 # coarse 6 # speed 0.75 # hpf 100,
+      gain "[0.75 1]*8" # sound "bd:8" # shape 0.3 # coarse 2 # speed (slow 4 $ scale 1.0 0.5 tri1) # hpf 160 # pan (fast 2 $ scale 0.25 0.75 sine1) |*| gain (slow 16 envL),
+      stut 3 0.5 "<0.5 1 0.75>" $ sound "ifdrums" # shape 0.5 # speed 0.5 # hpf 100,
+      sound "jungbass:4",
+      stut 3 0.5 0.5 $ slow 1.5 $ sound "future:9(1,8,<2 3>)" # shape 0.5 # speed 0.5 # coarse 5 # gain 1.1 # hpf 200
+    ]
+  d2
+    $ stack [
+      stut 6 0.5 0.25 $ sound "ab:5*3",
+      slow 1.5 $ sound "stomp:3(1,4,1)" # coarse 4,
+      loopAt 2 $ sound "subroc3d:6" # hpf 100 # gain 0.8,
+      (1 <~) $ sound "cp(1/8,8,2)" # speed 0.9 # coarse 2 # lpf 3000,
+      gain "[0.75 1]*8" # sound "chin:0" # coarse 2 # speed (slow 8 $ scale 1.5 1.0 tri1) # pan (fast 2 $ sine1)
+    ] # room 1 # size 0.95 # orbit 1 |*| gain 0.8
+  d3
+    $ stack [
+      whenmod' 64 0 16 (# gain 0) $ whenmod 8 6 (fast 1.5) $ gain "[0.75 1]*4" # sound "808:1" # speed 1.2 # coarse 2 |*| gain 0.95
+    ]
+
+hush
