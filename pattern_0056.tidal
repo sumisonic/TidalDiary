@@ -1,0 +1,33 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ off 0.25 (
+        (|*| gain 0.8).
+        (rev).
+        (slow 1.5).
+        (# coarse (choose [6,8,4])).
+        (# speed (choose [0.5, 0.75, -0.75, 0.8]))
+      )
+    $ every' 8 7 (within (0.5, 1) (stut 4 0.25 0.5))
+    $ stack[
+      sound "ifdrums(<3 3 3 3 4 4 4 4>,8,<0 3>)" # shape 0.5 # speed 0.8,
+      every' 3 2 (stut 4 0.75 0.75)
+      $ within (0.25, 0.75) (slow 1.5)
+      $ iter 8
+      $ sound "amencutup(<8 4>,2)" # n (slow 4 $ run 32) # shape 0.5 # speed (choose [0.5, -0.5, 0.75, 0.25]) # coarse 4 # hpf 200 # pan (fast 2 $ scale 0.25 0.75 tri1) # lpf (slow 8 $ scale 1200 6000 tri1) # lpq 0.2 # hpf 200 # gain (scale 0.5 0.8 sine1),
+      degradeBy 0.2 $ stut 4 0.5 0.25 $ every' 3 2 (brak) $ sound "auto:6*4" # up 5 # shape 0.5 # coarse 6 # hpf 100 # lpf (slow 6 $ scale 400 2200 tri1) # gain (slow 8 $ scale 0.5 0.9 tri1),
+      whenmod' 16 0 8 (# gain 0) $ every' 3 2 (within (0.5, 1) (stut 6 0.5 0.5)) $ sound "ifdrums:2(2,8,<1 5>)" # speed "0.5 0.6" # coarse 4 # gain 0.95,
+      whenmod 16 8 (fast 2) $ gain "[0.75 1.0]*4" # sound "ifdrums:1" # speed 1.2,
+      (0.125 ~>) $ sound "jungbass:4" # lpf 100,
+      stut 4 0.5 0.25 $ sound "mt(3,8,<0 1>)" # coarse 8 # speed 0.75
+    ]
+  d2
+    $ stack [
+      sound "chin*3" # gain 1.3,
+      sound "industrial:20/2" # speed (-0.25) # gain 0.8 # hpf 100 # lpf 1800,
+      whenmod' 64 0 8 (# gain 0) $ gap 128 $ sound "subroc3d:6/4" # coarse 6 # shape 0.2 # speed 0.4 # gain 0.95
+    ] # room 1 # size 0.95 # orbit 1 |*| gain 0.8
+
+hush
