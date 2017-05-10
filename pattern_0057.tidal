@@ -1,0 +1,30 @@
+cps (65/120)
+
+do
+  d1
+    $ every' 4 3 (within (0.25, 0.75) (slow 1.5))
+    $ every' 8 7 (within (0.5, 1) (stut 3 0.25 0.5))
+    $ stack[
+      sound "909(<2 3>,<2 3>)" # shape 0.5 # coarse 6 # speed 0.8,
+      sound "mt*4" # hpf 100 # lpf 800 # speed 0.5 |*| gain (slow 6 envL),
+      whenmod 8 4 (fast (8/6)) $ gain "[1 0.6]*6" # sound "808:1" |*| gain (slow 8 envL),
+      stut (choose [3,4,6]) 0.5 0.5 $ (0.75 ~>) $ sound "industrial:2/1.5" # coarse 2 # speed 0.8 # gain 1.1,
+      (0.5 ~>) $ stack [
+        sound "ifdrums" # shape 0.5 # speed 0.7 # coarse 6 # gain 0.9,
+        sound "jungbass:4" # speed 0.7
+      ] # hpf 40 |*| gain 0.9,
+      whenmod 6 3 (fast (8/12)) $ sound "techno(12,12)" # shape 0.5 # speed (scale 1.1 1.2 tri1) # lpf (slow 4 $ scale 100 800 tri1) # lpq 0.1 # legato (slow 6 $ scale 0.25 1 tri1) # pan (fast 2 $ scale 0.25 0.75 sine1) # gain 0.9 |*| gain (slow 8 envL)
+    ]
+  d2
+    $ stack [
+      gain "[1 0.6]*8" # sound "chin" # gain 1,
+      sound "tok:(1,4,3)" # gain 1.1 # coarse 2,
+      sound "wind:5(8,8)" # speed 0.2 # gain (slow 2 $ scale 1 0.5 tri1) # hpf 200,
+      (0.25 ~>) $ gap 32 $ sound "flick:4/1.5" # speed (-0.5) # gain 0.7 # coarse 4,
+      stut 12 0.5 1 $ slow 1.5 $ stack [
+        sound "sine:0(1,8,7)" # speed 3 # gain 0.5 # legato (slow 4 $ scale 0.1 1 tri1),
+        sound "sundance(1,8,3)" # speed 0.5 # coarse "<2 4 6 8>" # gain 0.9
+      ] |*| gain (slow 12 envL)
+    ] # room 1 # size 0.95 # orbit 1 |*| gain 0.9
+
+hush
