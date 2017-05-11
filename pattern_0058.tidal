@@ -1,0 +1,31 @@
+cps (45/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ whenmod' 128 0 2 (|*| gain 0)
+    $ (2 ~>)
+    $ every' 4 3 (within (0.5, 1) (slow 1.5))
+    $ stack [
+      iter 4 $ gain "1 1 0 1 0 1 <1 0> <0 1>" # sound "909" # shape 0.5 # coarse 6,
+      every' 3 2 (fast (6/4)) $ stut 3 0.25 0.25 $ gain "0 0 0 0 0 0 <1 0> <0 1>" # sound "[auto:2, ifdrums:2]" # shape 0.5 # speed 0.75 # coarse 6 |*| gain 0.9,
+      whenmod 8 4 (fast (6/4)) $ stack [
+        every' 4 3 (slow 1.5) $ gain "[0.7 1]*4" # sound "[glitch:0, 808:1]" # shape 0.3 |*| gain 1.3,
+        sound "ifdrums(<2 3>,<2 3>)" # shape 0.5 # speed 0.6
+      ],
+      iter 4 $ sound "jungbass:2(3,8,<2 5>)" # shape 0.5 # lpf 100 # up (-3) # lpq 0.1,
+      whenmod 6 3 (fast (6/4)) $ sound "lt*16" # lpf (slow 4 $ scale 120 200 tri1) # lpq 0.1 # speed 1.5 # gain (slow 2 $ scale 0.5 1.1 saw1) # hpf 100,
+      sound "auto:5(2,<8 4>,6)" # shape 0.3 # coarse 4 # gain 1.1
+    ] |*| gain 1
+  d2
+    $ (2 ~>)
+    $ stack [
+      sound "chin*16" # gain 1.2,
+      sound "cp(1/2,8,1)",
+      (0.5 <~) $ stut 6 0.25 1 $ sound "flick:1/4" # speed (0.8) # shape 0.1 # coarse 4,
+      loopAt 1 $ gap 64 $ sound "arp/2" # hpf 100 # gain 1,
+      sound "industrial:8" # speed (-0.5) # gain 0.8 # coarse 8 # lpf (slow 16 $ scale 1000 20000 sine1) # lpq 0.2,
+      sound "click:2*6" # gain (slow 4 $ scale 0.75 1 sine1)
+    ] # room 1 # size 0.95 # orbit 1 |*| gain 0.9
+
+hush
