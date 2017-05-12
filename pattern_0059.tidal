@@ -1,0 +1,38 @@
+cps (65/120)
+
+do
+  let whenmod' n s e = when ( (\c -> (c >= s) && (c < e)).(`mod` n) )
+  d1
+    $ whenmod' 128 0 8 ((stut "<0 1 2 3 4 6>" 0.5 0.5).(slow "<1.5 2 4 6 8>"))
+    $ every' 8 7 (within (0.5, 1) (stut 3 0.25 0.5))
+    $ stack [
+      every' 4 3 (within (0, 0.5) (stut 4 0.5 0.5))
+      $ slow "1 1.5 2"
+      $ stack [
+        sound "909(<2 3>,4)" # shape 0.5 # coarse "4 2",
+        sound "ifdrums(3,8,<0 5>)" # shape 0.5 # speed 0.7 # coarse "6 8"
+      ],
+      whenmod' 128 0 16 (slow "1 2")
+      $ stack [
+        whenmod' 64 0 8 (# gain 0) $ stut "<4 4 [4 2]>" 0.25 0.25 $ gain "[0 1]*8" # sound "808:1" # legato (slow 4 $ scale 0.1 1 sine1) # pan (fast 2 $ scale 0.25 0.75 sine1) |*| gain 1.1,
+        every' 3 2 (0.125 <~) $ iter 4 $ gain "[1 0.8 0.8 1 0.5 1 0.8 1]*2" # sound "lt" # lpf (slow 4 $ scale 400 300 tri1) # lpq 0.05 # speed 0.5 # hpf 100 # coarse 12
+      ],
+      stut 4 0.5 0.25 $ slow 1.5 $ sound "if:2(1,8,2)" # speed 0.7 # coarse 8 # legato 2 # lpf 2000,
+      gap (choose [4,8,12]) $ sound "stab:3*16" # gain (slow 3 $ scale 0.9 0.5 sine1) # coarse 4 # speed 0.8,
+      stut "<3 3 4 4>" 0.75 0.75 $ sound "[~ insect:1/2] ~ ~ ~" # coarse 2 # up 1,
+      every' 4 3 (stut 6 0.25 0.75) $ every' 3 2 (0.125 ~>) $ slow 1.5 $ gain "0 0 1 0" # sound "short:1" # shape 0.5 # coarse 4 # speed 0.8 # hpf 100 |*| gain 1.1,
+      whenmod' 8 0 4 (# gain 0) $ stut 3 0.25 0.5 $ gain "[1 0.8]*6" # sound "auto:9" |*| gain 0.9 # hpf 100 # speed (-0.9),
+      (0.25 ~>) $ sound "jungbass:14/2" # gain 1,
+      stut 4 0.75 2 $ (1 <~) $ sound "[flick:2, dr:13](1/4,8,6)" # shape 0.5 # legato 2 # speed 0.8,
+      stut "6 4" 0.75 0.75 $ sound "808(1/2,8,3)" # speed (0.5) # bpf 1200 # gain 1.1
+    ]
+  d2
+    $ stack [
+      gain "[1 0.5]*8" # sound "chin" # gain 1.2,
+      sound "v:3(1/2,8,7)" # speed 0.5,
+      whenmod' 8 4 8 (# gain 0) $ sound "d*16" # gain (slow 2 $ scale 0.5 1 saw1) # lpf (slow 4 $ scale 2000 1000 tri1) # lpq 0.15,
+      whenmod' 64 0 8 (# gain 0) $ stut 4 0.5 0.5 $ (0.125 ~>) $ up "~ ~ [[0 5] [~ 2]] ~" # sound "sundance:3" # gain (slow 8 $ scale 1 1.3 sine1) |+| up 12 # lpf 1200 # legato 2 # coarse 8,
+      (1 <~) $ sound "flick:1(1/4,8,3)"
+    ] # room 1 # size 0.98 # orbit 1 |*| gain 0.8
+
+hush
